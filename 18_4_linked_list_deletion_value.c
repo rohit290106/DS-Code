@@ -74,11 +74,13 @@ int main()
 
     head = deletion_value(head, value);
 
-    if(head){
+    if (head)
+    {
         printf("After deletion by value.\n");
         transversal(head);
     }
-    else{
+    else
+    {
         printf("You enter wrong value. \n");
     }
 

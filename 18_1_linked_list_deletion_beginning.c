@@ -9,8 +9,8 @@ struct linked
 
 struct linked *deletion_beginning(struct linked *head)
 {
-    struct linked *ptr=head;
-    head=head->next;
+    struct linked *ptr = head;
+    head = head->next;
     free(ptr);
     return head;
 }
@@ -34,8 +34,8 @@ int main()
     first = (struct linked *)malloc(sizeof(struct linked));
     second = (struct linked *)malloc(sizeof(struct linked));
     third = (struct linked *)malloc(sizeof(struct linked));
-    
-    head=first;
+
+    head = first;
 
     first->data = 56;
     first->next = second;

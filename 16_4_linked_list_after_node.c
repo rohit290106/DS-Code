@@ -10,7 +10,7 @@ struct linked
 struct linked *insertion_after_node(struct linked *head, int data, struct linked *afternode)
 {
     struct linked *ptr = (struct linked *)malloc(sizeof(struct linked));
-    ptr->data=data;
+    ptr->data = data;
     ptr->next = afternode->next;
     afternode->next = ptr;
 

@@ -5,19 +5,20 @@ typedef struct linked
 {
     int data;
     struct linked *next;
-}node;
+} node;
 
 node *deletion_end(node *head)
 {
-    node *p=head;
-    node *q=head->next;
+    node *p = head;
+    node *q = head->next;
 
-    while(q->next!=NULL){
-        p=p->next;
-        q=q->next;
+    while (q->next != NULL)
+    {
+        p = p->next;
+        q = q->next;
     }
 
-    p->next=q->next;
+    p->next = q->next;
     free(q);
 
     return head;
@@ -43,8 +44,8 @@ int main()
     first = (node *)malloc(sizeof(node));
     second = (node *)malloc(sizeof(node));
     third = (node *)malloc(sizeof(node));
-    
-    head=first;
+
+    head = first;
 
     first->data = 56;
     first->next = second;
@@ -56,7 +57,7 @@ int main()
     third->next = NULL;
 
     transversal(head);
-    
+
     head = deletion_end(head);
 
     printf("After deletion at end.\n");

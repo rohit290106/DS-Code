@@ -5,9 +5,9 @@ typedef struct linked
 {
     int data;
     struct linked *next;
-}node;
+} node;
 
-node *deletion_mid(node *head,int position)
+node *deletion_mid(node *head, int position)
 {
     // My metod
 
@@ -23,15 +23,16 @@ node *deletion_mid(node *head,int position)
 
     // sir method
 
-    node *p=head;
-    node *q=head->next;
+    node *p = head;
+    node *q = head->next;
 
-    for(int i=1;i<position-1;i++){
-        p=p->next;
-        q=q->next;
+    for (int i = 1; i < position - 1; i++)
+    {
+        p = p->next;
+        q = q->next;
     }
 
-    p->next=q->next;
+    p->next = q->next;
 
     free(q);
 
@@ -58,8 +59,8 @@ int main()
     first = (node *)malloc(sizeof(node));
     second = (node *)malloc(sizeof(node));
     third = (node *)malloc(sizeof(node));
-    
-    head=first;
+
+    head = first;
 
     first->data = 56;
     first->next = second;
@@ -73,9 +74,9 @@ int main()
     transversal(head);
 
     printf("Enter the position you want to delete:\n");
-    scanf("%d",&position);
-    
-    head = deletion_mid(head,position);
+    scanf("%d", &position);
+
+    head = deletion_mid(head, position);
 
     printf("After deletion at mid.\n");
 

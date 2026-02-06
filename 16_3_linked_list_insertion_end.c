@@ -13,7 +13,7 @@ struct linked *insertion_end(struct linked *head, int data)
     struct linked *p = head;
     int i = 0;
 
-    while (p->next!=NULL)
+    while (p->next != NULL)
     {
         p = p->next;
     }
@@ -59,7 +59,7 @@ int main()
     printf("Enter the value you want to insert in the end:\n");
     scanf("%d", &value);
 
-    first = insertion_end(first,value);
+    first = insertion_end(first, value);
 
     printf("After insrertion at end.\n");
     transversal(first);
