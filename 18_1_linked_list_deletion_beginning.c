@@ -9,10 +9,9 @@ struct linked
 
 struct linked *deletion_beginning(struct linked *head)
 {
-    struct linked *ptr=head->next;
-
-    head=ptr;
-
+    struct linked *ptr=head;
+    head=head->next;
+    free(ptr);
     return head;
 }
 
