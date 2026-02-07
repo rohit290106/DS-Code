@@ -7,6 +7,7 @@ typedef struct linked
     struct linked *next;
 } node;
 
+// For showing elements of list.
 void tranverse(node *head)
 {
     node *ptr=head;
@@ -17,12 +18,30 @@ void tranverse(node *head)
     }while(ptr!=head);
 }
 
+// For insertion at the beginning
+node* insertion(node *head,int value){
+    node *ptr=(node*)malloc(sizeof(node));
+    ptr->data=value;
+    node *p=head;
+    node *q=head->next;
+    while (q->next!=head)
+    {
+        q=q->next;
+    }
+    q->next=ptr;
+    ptr->next=p;
+    head=ptr;
+    
+    return head;
+}
+
 int main()
 {
     node *first;
     node *second;
     node *third;
     node *head;
+    int value;
 
     first = (node *)malloc(sizeof(node));
     second = (node *)malloc(sizeof(node));
@@ -38,6 +57,12 @@ int main()
 
     third->data = 45;
     third->next = head;
+
+    tranverse(head);
+    printf("Enter the value you want to insert at the beginning: \n");
+    scanf("%d",&value);
+    
+    head=insertion(head,value);
 
     tranverse(head);
 
