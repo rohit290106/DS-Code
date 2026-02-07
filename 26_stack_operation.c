@@ -8,7 +8,7 @@ typedef struct stack
     int *arr;
 } node;
 
-void push(node *ptr, int value)
+void push(node *ptr)
 {
     if (ptr->top == ptr->size - 1)
     {
@@ -16,6 +16,10 @@ void push(node *ptr, int value)
     }
     else
     {
+        int value;
+        printf("Enter the value you want to push:\n");
+        scanf("%d", &value);
+
         ptr->arr[++ptr->top] = value;
         printf("The push element: %d \n\n", ptr->arr[ptr->top]);
     }
@@ -54,7 +58,6 @@ int main()
 {
     node *s;
     int mode;
-    int value;
 
     s->size = 20;
     s->top = -1;
@@ -62,16 +65,17 @@ int main()
 
     do
     {
-        printf("Enter the mode  of operation.\nPress 1 for push.\nPress 2 for pop\nPress 3 for Display.\nPress 4 for Exit\n");
+        printf("Enter the mode  of operation.\n");
+        printf("Press 1 for push.\n");
+        printf("Press 2 for pop.\n");
+        printf("Press 3 for display.\n");
+        printf("Press 4 for Exit\n");
         scanf("%d", &mode);
 
         switch (mode)
         {
         case 1:
-            printf("Enter the value you want to push:\n");
-            scanf("%d", &value);
-
-            push(s, value);
+            push(s);
             break;
 
         case 2:
