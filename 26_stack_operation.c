@@ -44,7 +44,7 @@ void display(node *ptr)
     {
         while (i != -1)
         {
-            printf("The element: %d \n\n", ptr->arr[i--]);
+            printf("The element: %d\n", ptr->arr[i--]);
         }
     }
     printf("\n");
