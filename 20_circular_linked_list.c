@@ -19,7 +19,7 @@ void tranverse(node *head)
 }
 
 // For insertion at the beginning
-node* insertion(node *head,int value){
+node* insertion_beginning(node *head,int value){
     node *ptr=(node*)malloc(sizeof(node));
     ptr->data=value;
     node *p=head;
@@ -62,8 +62,10 @@ int main()
     printf("Enter the value you want to insert at the beginning: \n");
     scanf("%d",&value);
     
-    head=insertion(head,value);
+    head=insertion_beginning(head,value);
 
+    printf("After insertion at the beginning. \n");
+    
     tranverse(head);
 
     return 0;
