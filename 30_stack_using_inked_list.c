@@ -78,24 +78,40 @@ void peek()
         int position;
         printf("Enter the position of stack that you want to observe:\n");
         scanf("%d", &position);
-        stack *ptr = top;
-        while (count != position)
+        if (position < 0)
         {
-            ptr = ptr->next;
-            count++;
+            printf("This position does not exist in a stack.\n");
         }
-        printf("The peek element:%d\n", ptr->data);
+        else
+        {
+            stack *ptr = top;
+            while (count != position && ptr != NULL)
+            {
+                ptr = ptr->next;
+                count++;
+            }
+            if (ptr != NULL)
+            {
+                printf("The peek element:%d\n", ptr->data);
+            }
+            else
+            {
+                printf("This position does not exist in a stack.\n");
+            }
+        }
     }
     printf("\n");
 }
 
-void top_bottom_peak(){
-    stack *ptr=top;
-    printf("The top element of the stack is %d\n",ptr->data);
-    while(ptr->next!=NULL){
-        ptr=ptr->next;
+void top_bottom_peak()
+{
+    stack *ptr = top;
+    printf("The top element of the stack is %d\n", ptr->data);
+    while (ptr->next != NULL)
+    {
+        ptr = ptr->next;
     }
-    printf("The bottom element of the stack is %d\n",ptr->data);
+    printf("The bottom element of the stack is %d\n", ptr->data);
     printf("\n");
 }
 void display()
