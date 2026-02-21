@@ -59,13 +59,45 @@ void pop()
     {
         int value = top->data;
         printf("The pop value in a stack is %d \n", value);
-        stack *temp = top;
+        stack *ptr = top;
         top = top->next;
-        free(temp);
+        free(ptr);
     }
     printf("\n");
 }
 
+void peek()
+{
+    if (Stack_Empty())
+    {
+        printf("Stack is underflow,there is no element in a stack.\n");
+    }
+    else
+    {
+        int count = 1;
+        int position;
+        printf("Enter the position of stack that you want to observe:\n");
+        scanf("%d", &position);
+        stack *ptr = top;
+        while (count != position)
+        {
+            ptr = ptr->next;
+            count++;
+        }
+        printf("The peek element:%d\n", ptr->data);
+    }
+    printf("\n");
+}
+
+void top_bottom_peak(){
+    stack *ptr=top;
+    printf("The top element of the stack is %d\n",ptr->data);
+    while(ptr->next!=NULL){
+        ptr=ptr->next;
+    }
+    printf("The bottom element of the stack is %d\n",ptr->data);
+    printf("\n");
+}
 void display()
 {
     if (Stack_Empty())
@@ -90,8 +122,10 @@ int menu()
     printf("Enter the mode of operation.\n");
     printf("Press 1 for push.\n");
     printf("Press 2 for pop. \n");
-    printf("Press 3 for display.\n");
-    printf("Press 4 for Exit.\n");
+    printf("Press 3 for peek. \n");
+    printf("Press 4 for top_peek ant bottom_peak. \n");
+    printf("Press 5 for display.\n");
+    printf("Press 6 for Exit.\n");
     scanf("%d", &choice);
     return choice;
 }
@@ -110,9 +144,15 @@ int main()
             pop();
             break;
         case 3:
-            display();
+            peek();
             break;
         case 4:
+            top_bottom_peak();
+            break;
+        case 5:
+            display();
+            break;
+        case 6:
             return 0;
         default:
             printf("You Enter wrong button.\n");
