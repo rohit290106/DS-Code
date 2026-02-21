@@ -1,16 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct linked
+struct node
 {
     int data;
-    struct linked *next;
+    struct node *next;
 };
 
-struct linked *insertion_mid(struct linked *head, int data, int index)
+struct node *insertion_mid(struct node *head, int data, int index)
 {
-    struct linked *ptr = (struct linked *)malloc(sizeof(struct linked));
-    struct linked *p = head;
+    struct node *ptr = (struct node *)malloc(sizeof(struct node));
+    struct node *p = head;
     int i = 0;
 
     while (i != index - 1)
@@ -26,7 +26,7 @@ struct linked *insertion_mid(struct linked *head, int data, int index)
     return head;
 }
 
-void transversal(struct linked *ptr)
+void transversal(struct node *ptr)
 {
     while (ptr != NULL)
     {
@@ -37,15 +37,15 @@ void transversal(struct linked *ptr)
 
 int main()
 {
-    struct linked *first;
-    struct linked *second;
-    struct linked *third;
+    struct node *first;
+    struct node *second;
+    struct node *third;
     int value;
     int index;
 
-    first = (struct linked *)malloc(sizeof(struct linked));
-    second = (struct linked *)malloc(sizeof(struct linked));
-    third = (struct linked *)malloc(sizeof(struct linked));
+    first = (struct node *)malloc(sizeof(struct node));
+    second = (struct node *)malloc(sizeof(struct node));
+    third = (struct node *)malloc(sizeof(struct node));
 
     first->data = 56;
     first->next = second;

@@ -1,21 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct linked
+struct node
 {
     int data;
-    struct linked *next;
+    struct node *next;
 };
 
-struct linked *deletion_beginning(struct linked *head)
+struct node *deletion_beginning(struct node *head)
 {
-    struct linked *ptr = head;
+    struct node *ptr = head;
     head = head->next;
     free(ptr);
     return head;
 }
 
-void transversal(struct linked *ptr)
+void transversal(struct node *ptr)
 {
     while (ptr != NULL)
     {
@@ -26,14 +26,14 @@ void transversal(struct linked *ptr)
 
 int main()
 {
-    struct linked *first;
-    struct linked *second;
-    struct linked *third;
-    struct linked *head;
+    struct node *first;
+    struct node *second;
+    struct node *third;
+    struct node *head;
 
-    first = (struct linked *)malloc(sizeof(struct linked));
-    second = (struct linked *)malloc(sizeof(struct linked));
-    third = (struct linked *)malloc(sizeof(struct linked));
+    first = (struct node *)malloc(sizeof(struct node));
+    second = (struct node *)malloc(sizeof(struct node));
+    third = (struct node *)malloc(sizeof(struct node));
 
     head = first;
 

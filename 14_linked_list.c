@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct linked
+struct node
 {
     int data;
-    struct linked *next;
+    struct node *next;
 };
 
-void tranverse(struct linked *ptr)
+void tranverse(struct node *ptr)
 {
     while (ptr != NULL)
     {
@@ -18,13 +18,13 @@ void tranverse(struct linked *ptr)
 
 int main()
 {
-    struct linked *first;
-    struct linked *second;
-    struct linked *third;
+    struct node *first;
+    struct node *second;
+    struct node *third;
 
-    first = (struct linked *)malloc(sizeof(struct linked));
-    second = (struct linked *)malloc(sizeof(struct linked));
-    third = (struct linked *)malloc(sizeof(struct linked));
+    first = (struct node *)malloc(sizeof(struct node));
+    second = (struct node *)malloc(sizeof(struct node));
+    third = (struct node *)malloc(sizeof(struct node));
 
     first->data = 56;
     first->next = second;

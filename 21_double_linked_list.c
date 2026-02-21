@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct linked
+typedef struct node
 {
     int data;
-    struct linked *next;
-    struct linked *prev;
+    struct node *next;
+    struct node *prev;
 }node;
 
 // give output in forward direction 

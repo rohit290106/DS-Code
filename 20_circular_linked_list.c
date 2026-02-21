@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct linked
+typedef struct node
 {
     int data;
-    struct linked *next;
+    struct node *next;
 } node;
 
 // For showing elements of list.
