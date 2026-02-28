@@ -1,76 +1,97 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
  
-struct Node{
-    int data;
-    struct Node * next;
+struct stack
+{
+    int size;
+    int top;
+    char *arr;
 };
  
-struct Node* top = NULL;
- 
-void linkedListTraversal(struct Node *ptr)
+int isEmpty(struct stack *ptr)
 {
-    while (ptr != NULL)
+    if (ptr->top == -1)
     {
-        printf("Element: %d\n", ptr->data);
-        ptr = ptr->next; 
+        return 1;
+    }
+    else
+    {
+        return 0;
     }
 }
  
-int isEmpty(struct Node* top){
-    if (top==NULL){
+int isFull(struct stack *ptr)
+{
+    if (ptr->top == ptr->size - 1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+ 
+void push(struct stack* ptr, char val){
+    if(isFull(ptr)){
+        printf("Stack Overflow! Cannot push %d to the stack\n", val);
+    }
+    else{
+        ptr->top++;
+        ptr->arr[ptr->top] = val;
+    }
+}
+ 
+char pop(struct stack* ptr){
+    if(isEmpty(ptr)){
+        printf("Stack Underflow! Cannot pop from the stack\n");
+        return -1;
+    }
+    else{
+        char val = ptr->arr[ptr->top];
+        ptr->top--;
+        return val;
+    }
+}
+ 
+int parenthesisMatch(char * exp){
+    // Create and initialize the stack
+    struct stack* sp;
+    sp->size = 100;
+    sp->top = -1;
+    sp->arr = (char *)malloc(sp->size * sizeof(char));
+  
+ 
+    for (int i = 0; exp[i]!='\0'; i++)
+    {
+        if(exp[i]=='('){
+            push(sp, '(');
+        }
+        else if(exp[i]==')'){
+            if(isEmpty(sp)){
+                return 0;
+            }
+            pop(sp); 
+        }
+    }
+ 
+    if(isEmpty(sp)){
         return 1;
     }
     else{
         return 0;
     }
-}
- 
-int isFull(struct Node* top){
-    struct Node* p = (struct Node*)malloc(sizeof(struct Node));
-    if(p==NULL){
-        return 1;
-    }
-    else{
-        return 0;
-    }
-}
- 
-struct Node* push(struct Node* top, int x){
-    if(isFull(top)){
-        printf("Stack Overflow\n");
-    }
-    else{
-        struct Node* n = (struct Node*) malloc(sizeof(struct Node));
-        n->data = x;
-        n->next = top;
-        top = n;
-        return top;
-    }
-}
- 
-int pop(struct Node* tp){
-    if(isEmpty(tp)){
-        printf("Stack Underflow\n");
-    }
-    else{
-        struct Node* n = tp;
-        top = (tp)->next;
-        int x = n->data;
-        free(n);
-        return x; 
-    }
-}
- 
-int main(){
-    top = push(top, 78);
-    top = push(top, 7);
-    top = push(top, 8);
     
-    // linkedListTraversal(top);
- 
-    int element = pop(top); 
-    printf("Popped element is %d\n", element);
-    linkedListTraversal(top);
+}
+int main()
+{
+    char * exp = "((8)(*--$$9))";
+    // Check if stack is empty
+    if(parenthesisMatch(exp)){
+        printf("The parenthesis is matching");
+    }
+    else{
+        printf("The parenthesis is not matching");
+    }
     return 0;
 }
