@@ -1,129 +1,138 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
-struct stack
+typedef struct
 {
     int size;
-    int top;
-    char *arr;
-};
+    int front;
+    int rear;
+    int *array;
+} Queue;
 
-int stackTop(struct stack *sp)
+/* Check if queue is full */
+int isFull(Queue *q)
 {
-    return sp->arr[sp->top];
-}
-
-int isEmpty(struct stack *ptr)
-{
-    if (ptr->top == -1)
-    {
-        return 1;
-    }
-    else
-    {
-        return 0;
-    }
+    return (q->rear == q->size - 1);
 }
 
-int isFull(struct stack *ptr)
+/* Check if queue is empty */
+int isEmpty(Queue *q)
 {
-    if (ptr->top == ptr->size - 1)
+    return (q->front == q->rear);
+}
+
+/* Enqueue operation */
+void enqueue(Queue *q)
+{
+    if (isFull(q))
     {
-        return 1;
+        printf("Queue Overflow! Cannot insert.\n\n");
+        return;
     }
-    else
+
+    int value;
+    printf("Enter value to insert: ");
+    scanf("%d", &value);
+
+    q->rear++;
+    q->array[q->rear] = value;
+
+    printf("Inserted: %d\n\n", value);
+}
+
+/* Dequeue operation */
+void dequeue(Queue *q)
+{
+    if (isEmpty(q))
     {
-        return 0;
+        printf("Queue Underflow! Nothing to delete.\n\n");
+        return;
+    }
+
+    q->front++;
+    int value = q->array[q->front];
+
+    printf("Deleted: %d\n\n", value);
+
+    /* Reset queue if it becomes empty */
+    if (q->front == q->rear)
+    {
+        q->front = -1;
+        q->rear = -1;
     }
 }
 
-void push(struct stack *ptr, char val)
+/* Display queue elements */
+void display(Queue *q)
 {
-    if (isFull(ptr))
+    if (isEmpty(q))
     {
-        printf("Stack Overflow! Cannot push %d to the stack\n", val);
+        printf("Queue is empty.\n\n");
+        return;
     }
-    else
+
+    printf("Queue elements:\n");
+
+    for (int i = q->front + 1; i <= q->rear; i++)
     {
-        ptr->top++;
-        ptr->arr[ptr->top] = val;
+        printf("%d ", q->array[i]);
     }
+
+    printf("\n\n");
 }
 
-char pop(struct stack *ptr)
+/* Menu function */
+int menu()
 {
-    if (isEmpty(ptr))
-    {
-        printf("Stack Underflow! Cannot pop from the stack\n");
-        return -1;
-    }
-    else
-    {
-        char val = ptr->arr[ptr->top];
-        ptr->top--;
-        return val;
-    }
-}
-int precedence(char ch)
-{
-    if (ch == '*' || ch == '/')
-        return 3;
-    else if (ch == '+' || ch == '-')
-        return 2;
-    else
-        return 0;
+    int choice;
+
+    printf("===== QUEUE MENU =====\n");
+    printf("1. Enqueue\n");
+    printf("2. Dequeue\n");
+    printf("3. Display\n");
+    printf("4. Exit\n");
+    printf("Enter your choice: ");
+
+    scanf("%d", &choice);
+    return choice;
 }
 
-int isOperator(char ch)
-{
-    if (ch == '+' || ch == '-' || ch == '*' || ch == '/')
-        return 1;
-    else
-        return 0;
-}
-char *infixToPostfix(char *infix)
-{
-    struct stack *sp = (struct stack *)malloc(sizeof(struct stack));
-    sp->size = 10;
-    sp->top = -1;
-    sp->arr = (char *)malloc(sp->size * sizeof(char));
-    char *postfix = (char *)malloc((strlen(infix) + 1) * sizeof(char));
-    int i = 0; // Track infix traversal
-    int j = 0; // Track postfix addition
-    while (infix[i] != '\0')
-    {
-        if (!isOperator(infix[i]))
-        {
-            postfix[j] = infix[i];
-            j++;
-            i++;
-        }
-        else
-        {
-            if (precedence(infix[i]) > precedence(stackTop(sp)))
-            {
-                push(sp, infix[i]);
-                i++;
-            }
-            else
-            {
-                postfix[j] = pop(sp);
-                j++;
-            }
-        }
-    }
-    while (!isEmpty(sp))
-    {
-        postfix[j] = pop(sp);
-        j++;
-    }
-    postfix[j] = '\0';
-    return postfix;
-}
+/* Main function */
 int main()
 {
-    char *infix = "x-y/z-k*d";
-    printf("postfix is %s", infixToPostfix(infix));
+    Queue *q = (Queue *)malloc(sizeof(Queue));
+
+    q->size = 10;
+    q->front = -1;
+    q->rear = -1;
+    q->array = (int *)malloc(q->size * sizeof(int));
+
+    while (1)
+    {
+        switch (menu())
+        {
+        case 1:
+            enqueue(q);
+            break;
+
+        case 2:
+            dequeue(q);
+            break;
+
+        case 3:
+            display(q);
+            break;
+
+        case 4:
+            free(q->array);
+            free(q);
+            printf("Program exited successfully.\n");
+            return 0;
+
+        default:
+            printf("Invalid choice! Try again.\n\n");
+        }
+    }
+
     return 0;
 }
