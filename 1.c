@@ -1,33 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct queue
+typedef struct node
 {
-    int size;
-    int front;
-    int rear;
-    int count;
-    int *array;
-} queue;
+    int data;
+    struct node *next;
+} Node;
 
-/* Check if Queue is Full */
-int isFull(queue *q)
-{
-    return (q->count == q->size);
-}
+Node *front = NULL;
+Node *rear = NULL;
 
-/* Check if Queue is Empty */
-int isEmpty(queue *q)
+void enqueue()
 {
-    return (q->count == 0);
-}
+    Node *newNode = (Node *)malloc(sizeof(Node));
 
-/* Enqueue Operation */
-void enqueue(queue *q)
-{
-    if (isFull(q))
+    if (newNode == NULL)
     {
-        printf("Queue Overflow! Enqueue cannot be performed.\n\n");
+        printf("Memory allocation failed!\n");
         return;
     }
 
@@ -35,98 +24,112 @@ void enqueue(queue *q)
     printf("Enter value to enqueue: ");
     scanf("%d", &value);
 
-    q->rear = (q->rear + 1) % q->size;
-    q->array[q->rear] = value;
-    q->count++;
+    newNode->data = value;
+    newNode->next = NULL;
 
-    printf("Enqueued value: %d\n\n", value);
+    // If queue is empty
+    if (front == NULL)
+    {
+        front = rear = newNode;
+    }
+    else
+    {
+        rear->next = newNode;
+        rear = newNode;
+    }
+
+    printf("Enqueued: %d\n", value);
 }
 
-/* Dequeue Operation */
-void dequeue(queue *q)
+void dequeue()
 {
-    if (isEmpty(q))
+    if (front == NULL)
     {
-        printf("Queue Underflow! Dequeue cannot be performed.\n\n");
+        printf("Queue is empty! Cannot dequeue.\n");
         return;
     }
 
-    q->front = (q->front + 1) % q->size;
-    int value = q->array[q->front];
-    q->count--;
+    Node *temp = front;
+    int removedValue = temp->data;
 
-    printf("Dequeued value: %d\n\n", value);
+    front = front->next;
+
+    // If queue becomes empty after dequeue
+    if (front == NULL)
+    {
+        rear = NULL;
+    }
+
+    free(temp);
+
+    printf("Dequeued: %d\n", removedValue);
 }
 
-/* Display Queue */
-void display(queue *q)
+void traverse()
 {
-    if (isEmpty(q))
+    if (front == NULL)
     {
-        printf("Queue is empty. Nothing to display.\n\n");
+        printf("Queue is empty!\n");
         return;
     }
+
+    Node *temp = front;
 
     printf("Queue elements:\n");
-
-    int index = (q->front + 1) % q->size;
-
-    for (int i = 0; i < q->count; i++)
+    while (temp != NULL)
     {
-        printf("%d ", q->array[index]);
-        index = (index + 1) % q->size;
+        printf("%d ", temp->data);
+        temp = temp->next;
     }
-
-    printf("\n\n");
+    printf("\n");
 }
 
-/* Menu Function */
 int menu()
 {
     int choice;
-    printf("========== QUEUE MENU ==========\n");
+
+    printf("\n------ Queue Menu ------\n");
     printf("1. Enqueue\n");
     printf("2. Dequeue\n");
-    printf("3. Display\n");
+    printf("3. Traverse\n");
     printf("4. Exit\n");
     printf("Enter your choice: ");
     scanf("%d", &choice);
+
     return choice;
 }
 
-/* Main Function */
 int main()
 {
-    queue *q = malloc(sizeof(queue));
+    int choice;
 
-    q->size = 10;
-    q->front = -1;
-    q->rear = -1;
-    q->count = 0;
-    q->array = malloc(q->size * sizeof(int));
-
-    while (1)
+    do
     {
-        switch (menu())
+        choice = menu();
+
+        switch (choice)
         {
         case 1:
-            enqueue(q);
+            enqueue();
             break;
+
         case 2:
-            dequeue(q);
+            dequeue();
             break;
+
         case 3:
-            display(q);
+            traverse();
             break;
+
         case 4:
-            free(q->array);
-            free(q);
-            printf("Program exited successfully.\n");
-            return 0;
+            printf("Exiting program successfully!\n");
+            break;
+
         default:
-            printf("Invalid choice! Try again.\n\n");
+            printf("Invalid choice! Try again.\n");
         }
-    }
+
+    } while (choice != 4);
 
     return 0;
 }
