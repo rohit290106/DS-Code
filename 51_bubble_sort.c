@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void bubble_sort(int array[], int n)
+void bubble_sort(int a[], int n)
 {
     int temp;
     int swapped = 0;
@@ -12,11 +12,11 @@ void bubble_sort(int array[], int n)
 
         for (int i = 0; i < n - j; i++)
         {
-            if (array[i] > array[i + 1])
+            if (a[i] > a[i + 1])
             {
-                temp = array[i];
-                array[i] = array[i + 1];
-                array[i + 1] = temp;
+                temp = a[i];
+                a[i] = a[i + 1];
+                a[i + 1] = temp;
                 swapped++;
             }
         }
@@ -28,25 +28,25 @@ void bubble_sort(int array[], int n)
     }
 }
 
-void traverse(int array[], int n)
+void traverse(int a[], int n)
 {
     for (int i = 0; i < n; i++)
-        printf("%d ", array[i]);
+        printf("%d ", a[i]);
     printf("\n");
 }
 
 int main()
 {
     int array[] = {1, 45, 6, 9, 3, 8, 2, 5, 11, 19};
-    int n = sizeof(array) / sizeof(array[0]);
+    int size = sizeof(array) / sizeof(array[0]);
 
     printf("The array:\n");
-    traverse(array, n);
+    traverse(array, size);
 
-    bubble_sort(array, n);
+    bubble_sort(array, size);
 
     printf("The bubble sorted array:\n");
-    traverse(array, n);
+    traverse(array, size);
 
     return 0;
 }
