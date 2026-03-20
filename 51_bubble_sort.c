@@ -1,16 +1,20 @@
 #include <stdio.h>
 
+void traverse();
+
+// This function doing soting of element using bubble sort.
 void bubble_sort(int a[], int n)
 {
     int temp;
     int swapped = 0;
 
-    printf("No. of passes!\n");
-    
+    printf("                                            _____BUBBBLE SORT_____\n");
+    printf("\n");
+
     for (int j = 1; j < n; j++)
     {
         swapped = 0;
-        printf("pass %d\n", j);
+        printf("cycling %d time...\n", j);
 
         for (int i = 0; i < n - j; i++)
         {
@@ -23,6 +27,10 @@ void bubble_sort(int a[], int n)
             }
         }
 
+        printf("After cycling %d time: \n", j);
+        traverse(a, n);
+        printf("\n");
+
         if (!swapped)
         {
             break;
@@ -30,11 +38,12 @@ void bubble_sort(int a[], int n)
     }
 }
 
+// Accessing the element of the array.
 void traverse(int a[], int n)
 {
     for (int i = 0; i < n; i++)
         printf("%d ", a[i]);
-        
+
     printf("\n");
 }
 

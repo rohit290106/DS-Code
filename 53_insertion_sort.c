@@ -2,6 +2,7 @@
 
 void traverse();
 
+// This function doing soting of element using insertion sort.
 void insertion_sort(int a[], int n)
 {
     int key;
@@ -26,12 +27,13 @@ void insertion_sort(int a[], int n)
         a[j + 1] = key;
 
         
-        printf("After checking %d element \n", i + 1);
+        printf("After checking %d element: \n", i + 1);
         traverse(a, n);
         printf("\n");
     }
 }
 
+// Accessing the element of the array.
 void traverse(int a[], int n)
 {
     for (int i = 0; i < n; i++)

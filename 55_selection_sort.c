@@ -23,7 +23,7 @@ void selection_sort(int a[], int n)
             }
         }
 
-        printf("After checking %d element \n", i + 1);
+        printf("After checking %d element: \n", i + 1);
         traverse(a, n);
         printf("\n");
     }
