@@ -7,7 +7,7 @@ void bubble_sort(int array[], int n)
 
     for (int j = 1; j < n; j++)
     {
-        swapped=0;
+        swapped = 0;
         printf("pass %d\n", j);
 
         for (int i = 0; i < n - j; i++)
@@ -25,7 +25,6 @@ void bubble_sort(int array[], int n)
         {
             break;
         }
-
     }
 }
 
