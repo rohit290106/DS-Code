@@ -10,7 +10,7 @@ void insertion_sort(int a[], int n)
 
     printf("                                        ______INSERTION SORT______\n");
     printf("\n");
-    
+
     for (int i = 1; i < n; i++)
     {
         printf("checking %d element... \n", i + 1);
@@ -26,7 +26,6 @@ void insertion_sort(int a[], int n)
 
         a[j + 1] = key;
 
-        
         printf("After checking %d element: \n", i + 1);
         traverse(a, n);
         printf("\n");
