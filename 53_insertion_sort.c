@@ -5,8 +5,12 @@ void insertion_sort(int a[], int n)
     int key;
     int j;
 
-    for (int i = 1; i < n - 1; i++)
+    printf("Checking the element!\n");
+
+    for (int i = 1; i < n; i++)
     {
+        printf("checking %d element. \n", i + 1);
+
         key = a[i];
         j = i - 1;
 
@@ -24,7 +28,7 @@ void traverse(int a[], int n)
 {
     for (int i = 0; i < n; i++)
         printf("%d ", a[i]);
-        
+
     printf("\n");
 }
 
@@ -35,8 +39,10 @@ int main()
 
     printf("The array:\n");
     traverse(array, size);
+    printf("\n");
 
     insertion_sort(array, size);
+    printf("\n");
 
     printf("The insertion sorted array:\n");
     traverse(array, size);

@@ -5,6 +5,8 @@ void bubble_sort(int a[], int n)
     int temp;
     int swapped = 0;
 
+    printf("No. of passes!\n");
+    
     for (int j = 1; j < n; j++)
     {
         swapped = 0;
@@ -43,8 +45,10 @@ int main()
 
     printf("The array:\n");
     traverse(array, size);
+    printf("\n");
 
     bubble_sort(array, size);
+    printf("\n");
 
     printf("The bubble sorted array:\n");
     traverse(array, size);
