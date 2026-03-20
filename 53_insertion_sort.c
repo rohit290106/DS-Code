@@ -1,15 +1,18 @@
 #include <stdio.h>
 
+void traverse();
+
 void insertion_sort(int a[], int n)
 {
     int key;
     int j;
 
-    printf("Checking the element!\n");
-
+    printf("                                        ______INSERTION SORT______\n");
+    printf("\n");
+    
     for (int i = 1; i < n; i++)
     {
-        printf("checking %d element. \n", i + 1);
+        printf("checking %d element... \n", i + 1);
 
         key = a[i];
         j = i - 1;
@@ -21,6 +24,11 @@ void insertion_sort(int a[], int n)
         }
 
         a[j + 1] = key;
+
+        
+        printf("After checking %d element \n", i + 1);
+        traverse(a, n);
+        printf("\n");
     }
 }
 
