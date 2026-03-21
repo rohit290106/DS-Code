@@ -1,135 +1,80 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-typedef struct node
+void traverse();
+
+// This function swap the pivot element in that place where in his left side small element
+//  are pesennt and its right side bigger element are present ,compared to pivot element.
+int pivotswap(int a[], int low, int high)
 {
-    int data;
-    struct node *next;
-} Node;
+    int i = low + 1;
+    int j = high;
+    int key = a[low];
+    int temp;
 
-Node *front = NULL;
-Node *rear = NULL;
-
-void enqueue()
-{
-    Node *newNode = (Node *)malloc(sizeof(Node));
-
-    if (newNode == NULL)
+    do
     {
-        printf("Memory allocation failed!\n");
-        return;
-    }
+        while (i <= high && a[i] <= key)
+        {
+            i++;
+        }
 
-    int value;
-    printf("Enter value to enqueue: ");
-    scanf("%d", &value);
+        while (j >= low && a[j] > key)
+        {
+            j--;
+        }
 
-    newNode->data = value;
-    newNode->next = NULL;
+        if (i < j)
+        {
+            temp = a[i];
+            a[i] = a[j];
+            a[j] = temp;
+        }
 
-    // If queue is empty
-    if (front == NULL)
-    {
-        front = rear = newNode;
-    }
-    else
-    {
-        rear->next = newNode;
-        rear = newNode;
-    }
+    } while (i < j);
 
-    printf("Enqueued: %d\n", value);
+    temp = a[low];
+    a[low] = a[j];
+    a[j] = temp;
+
+    return j;
 }
 
-void dequeue()
+// This function sort the element using quick sort method.
+void quick_sort(int a[], int low, int high)
 {
-    if (front == NULL)
+    int pivotindex;
+    int n = high;
+
+    if (low < high)
     {
-        printf("Queue is empty! Cannot dequeue.\n");
-        return;
+        pivotindex = pivotswap(a, low, high);
+        quick_sort(a, low, pivotindex - 1);
+        quick_sort(a, pivotindex + 1, high);
     }
-
-    Node *temp = front;
-    int removedValue = temp->data;
-
-    front = front->next;
-
-    // If queue becomes empty after dequeue
-    if (front == NULL)
-    {
-        rear = NULL;
-    }
-
-    free(temp);
-
-    printf("Dequeued: %d\n", removedValue);
 }
 
-void traverse()
+// Accessing the element of the array.
+void traverse(int a[], int n)
 {
-    if (front == NULL)
-    {
-        printf("Queue is empty!\n");
-        return;
-    }
+    for (int i = 0; i < n; i++)
+        printf("%d ", a[i]);
 
-    Node *temp = front;
-
-    printf("Queue elements:\n");
-    while (temp != NULL)
-    {
-        printf("%d ", temp->data);
-        temp = temp->next;
-    }
     printf("\n");
-}
-
-int menu()
-{
-    int choice;
-
-    printf("\n------ Queue Menu ------\n");
-    printf("1. Enqueue\n");
-    printf("2. Dequeue\n");
-    printf("3. Traverse\n");
-    printf("4. Exit\n");
-    printf("Enter your choice: ");
-    scanf("%d", &choice);
-
-    return choice;
 }
 
 int main()
 {
-    int choice;
+    int array[] = {1, 45, 6, 9, 3, 8, 2, 5, 11, 8, 19};
+    int size = sizeof(array) / sizeof(array[0]);
 
-    do
-    {
-        choice = menu();
+    printf("The array:\n");
+    traverse(array, size);
+    printf("\n");
 
-        switch (choice)
-        {
-        case 1:
-            enqueue();
-            break;
+    quick_sort(array, 0, size - 1);
 
-        case 2:
-            dequeue();
-            break;
-
-        case 3:
-            traverse();
-            break;
-
-        case 4:
-            printf("Exiting program successfully!\n");
-            break;
-
-        default:
-            printf("Invalid choice! Try again.\n");
-        }
-
-    } while (choice != 4);
+    printf("The quick sorted array:\n");
+    traverse(array, size);
 
     return 0;
 }
